@@ -1,3 +1,17 @@
+Vue.component('product-details', {
+  props: {
+    details: {
+      type: Array,
+      required: true
+    }
+  },
+  template: `
+    <ul>
+      <li v-for="detail in details">{{ detail }}</li>
+    </ul>
+  `
+})
+
 Vue.component('product', {
   props: {
     premium: {
@@ -21,16 +35,14 @@ Vue.component('product', {
             <p>{{sale}}</p>
             <p>Shipping: {{ shipping }}</p>
           <!--v-show is a more performant option, choosing to show it when varialbe is truthy, and when false, attaches a cs class of display:none -->
-          <ul>
-            <li v-for="detail in details">{{ detail }}</li>
-          </ul>
+
+          <product-details :details="details"></product-details>
 
           <div v-for="(variant, index) in variants"
                 :key="variant.variantId"
                 class="color-box"
                 :style="{ backgroundColor: variant.variantColor }"
-                @mouseover="updateProduct(index)"
-                >
+                @mouseover="updateProduct(index)">
           </div>
 
           <div>
@@ -48,7 +60,6 @@ Vue.component('product', {
           <div class="cart">
             <p>Cart ({{ cart }})</p>
           </div>
-
         </div>
       </div>
   `,

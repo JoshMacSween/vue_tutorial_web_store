@@ -58,6 +58,7 @@ Vue.component('product-review', {
         let productReview = {
           name: this.name,
           review: this.review,
+          recommend: this.recommend,
           rating: this.rating
         }
         this.$emit('review-submitted', productReview)
